@@ -130,33 +130,108 @@ modal.style.display = "none";
 });
 
 
+
+
+/* ========================= */
+/* FULLSCREEN ON STARTUP     */
+/* ========================= */
+
 function startDashboard() {
 
 const el = document.documentElement;
 
 if (el.requestFullscreen) {
-  el.requestFullscreen();
+el.requestFullscreen();
 } else if (el.webkitRequestFullscreen) {
-  el.webkitRequestFullscreen();
+el.webkitRequestFullscreen();
 } else if (el.msRequestFullscreen) {
-  el.msRequestFullscreen();
+el.msRequestFullscreen();
 }
 
-const modal = document.getElementById("startModal");
-if (modal) modal.style.display = "none";
+const screen = document.getElementById("startScreen");
+if (screen) screen.remove();
 
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", () => {
 
-const okButton = document.getElementById("startOk");
+const startScreen = document.getElementById("startScreen");
 
-if (okButton) {
-  okButton.addEventListener("click", startDashboard);
+if (startScreen) {
+startScreen.addEventListener("click", startDashboard, { once: true });
 }
 
 });
-closeBtn.addEventListener("click", launchFullscreen, { once: true });
-}
+
+
+/* ========================= */
+/* DIM BUTTON              */
+/* ========================= */
+
+const dimBtn = document.querySelector(".control-btn.dim");
+
+dimBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dim-mode");
+});
+
+
+/* ========================= */
+/* FULLSCREEN MAIN FEED       */
+/* ========================= */
+
+const fullscreenBtn = document.querySelector(".control-btn.fullscreen");
+const mainFeed = document.querySelector(".tile.main-feed");
+
+fullscreenBtn.addEventListener("click", () => {
+  mainFeed.classList.toggle("fullscreen-mode");
+});
+
+
+
+/* ========================= */
+/* BRODCAST CONTENT TO MAIN   */
+/* ========================= */
+const mainFrame = document.getElementById("mainFeedFrame");
+
+document.querySelectorAll(".tile").forEach(tile => {
+
+  const icon = tile.querySelector(".broadcast-icon");
+  const iframe = tile.querySelector("iframe");
+
+  if (!icon || !iframe) return;
+
+  icon.addEventListener("click", () => {
+
+    const src = iframe.getAttribute("src");
+
+    if (src && mainFrame) {
+      mainFrame.src = src;
+    }
+
+  });
+
+});
+
+
+document.querySelectorAll(".tile").forEach(tile => {
+
+  const icon = tile.querySelector(".broadcast-icon");
+  const iframe = tile.querySelector("iframe");
+
+  if (!icon || !iframe) return;
+
+  icon.addEventListener("click", () => {
+
+    const src = iframe.getAttribute("src");
+
+    mainFrame.src = src;
+
+    document.querySelectorAll(".tile").forEach(t =>
+      t.classList.remove("on-air")
+    );
+
+    tile.classList.add("on-air");
+
+  });
 
 });
