@@ -1,0 +1,796 @@
+/* ===================================== */
+/* GLOBAL                                */
+/* ===================================== */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ===================================== */
+/* CENTERED VIEWPORT                     */
+/* ===================================== */
+
+.viewport {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #212121;
+  background: linear-gradient(0deg, rgba(33, 33, 33, 1) 0%, rgba(41, 41, 84, 1) 53%, rgba(4, 6, 8, 1) 100%);
+}
+
+/* ===================================== */
+/* FIXED 16:9 MASTER CANVAS              */
+/* ===================================== */
+
+.scale-wrapper {
+  width: 1920px;
+  height: 1080px;
+  transform-origin: center center;
+}
+
+/* ===================================== */
+/* GRID                                  */
+/* ===================================== */
+
+.dashboard {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+/* ===================================== */
+/* TILE                                  */
+/* ===================================== */
+
+.tile {
+  position: relative;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0; /* base content layer */
+}
+
+.tile:hover {
+  outline: 1px solid rgba(10, 67, 190, 0.4);
+  outline-offset: -2px;
+  box-shadow: 0 0 20px rgba(13, 210, 236, 0.5);
+}
+
+/* THIS MAKES EACH TILE TRUE 16:9 */
+.tile-inner {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+
+.tile:hover .tile-inner {
+  outline: 1px solid  rgba(10, 67, 190, 0.4);
+  outline-offset: -2px;
+  box-shadow: 0 0 20px rgba(13, 210, 236, 0.5);
+}
+
+/* iframe fills 16:9 area */
+.tile iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+
+/* ===================================== */
+/* MAIN FEED (still 16:9 scaled larger)  */
+/* ===================================== */
+
+.main-feed {
+  grid-column: 3 / span 2;
+  grid-row: 2 / span 2;
+}
+
+
+.breaking-feed {
+  grid-column: span 3;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+
+/* ===================================== */
+/* OVERLAY NUMBER                        */
+/* ===================================== */
+
+.tile[data-number]::after {
+  content: attr(data-number);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  font-size: 50px;
+  color: rgba(51, 48, 48, 0.5);
+  pointer-events: none;
+
+  z-index: 1; /* place above tile content */
+}
+
+/* ===================================== */
+/* BROADCAST ICON (REAL ELEMENT)         */
+/* ===================================== */
+
+.broadcast-icon {
+  /* Keep your original rule exactly as-is - no changes */
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  z-index: 10;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+  color: white;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><circle cx='12' cy='12' r='3'/><path d='M4.93 4.93a10 10 0 000 14.14' stroke='white' stroke-width='2' fill='none'/><path d='M19.07 4.93a10 10 0 010 14.14' stroke='white' stroke-width='2' fill='none'/></svg>") no-repeat center;
+  background-size: contain;
+}
+
+.broadcast-icon:hover {
+  opacity: 1;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238B0000'><circle cx='12' cy='12' r='3'/><path d='M4.93 4.93a10 10 0 000 14.14' stroke='%238B0000' stroke-width='2' fill='none'/><path d='M19.07 4.93a10 10 0 010 14.14' stroke='%238B0000' stroke-width='2' fill='none'/></svg>") no-repeat center;
+  background-size: contain;
+  filter: drop-shadow(0 0 6px #fb1111);
+}
+
+/* ===================================== */
+/* PRIMARY CONTROL STACK (REAL ELEMENTS) */
+/* ===================================== */
+
+.control-stack {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 20;
+}
+
+.control-btn {
+  width: 26px;
+  height: 26px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* Hover only when hovering the icon itself */
+.control-btn:hover {
+  opacity: 1;
+  filter: drop-shadow(0 0 0px rgba(0, 224, 255, 0.8));
+}
+
+/* ICONS */
+
+.fullscreen {
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'>\
+<path d='M4 4h6v2H6v4H4V4zm14 0v6h-2V6h-4V4h6zM4 20v-6h2v4h4v2H4zm14-6v6h-6v-2h4v-4h2z'/>\
+</svg>");
+}
+
+.mute {
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'>\
+<path d='M3 9v6h4l5 5V4L7 9H3z'/>\
+</svg>");
+}
+
+/* BETTER DIM / BRIGHTNESS ICON */
+
+.dim {
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'>\
+<path d='M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z'/>\
+</svg>");
+}
+
+.control-stack {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.main-feed:hover .control-stack {
+  opacity: 1;
+}
+
+/* ===================================== */
+/* BREAKING FEED — REFINED COMMAND STYLE */
+/* ===================================== */
+/* ========================= */
+/* TWO COLUMN FEED LAYOUT   */
+/* ========================= */
+.breaking-feed {
+  position: relative;
+  background: #080808;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+.breaking-feed .feed-columns {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 0;
+  flex-wrap: nowrap; /* 🔥 prevent stacking */
+}
+
+.breaking-feed .feed-column {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Subtle scanline overlay */
+.breaking-feed::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.02),
+    rgba(255,255,255,0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.25;
+}
+
+/* Header */
+.breaking-feed .control-header {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #9aa0a6;
+  padding: 6px 12px;
+  text-align: left;
+}
+
+.breaking-feed .control-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 1%;
+  width: 98%;
+  height: 1px;
+  background: #1a1a1a;
+}
+
+/* Rows */
+.breaking-feed .ticker-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 24px;
+  width: 98%;
+}
+
+/* Agency block */
+.breaking-feed .agency {
+  width: 100px;
+  padding-left: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #dcdcdc;
+  position: relative;
+}
+
+/* LIVE blinking dot */
+.breaking-feed .agency::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff3b3b;
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.2;
+  transition: opacity 0.3s ease;
+}
+
+
+@keyframes liveBlink {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+/* Subtle agency color coding */
+.breaking-feed .ticker-row[data-feed="reuters"] .agency { color: #ff4c4c; }
+.breaking-feed .ticker-row[data-feed="afp"] .agency { color: #4ca6ff; }
+.breaking-feed .ticker-row[data-feed="ap"] .agency { color: #ffffff; }
+.breaking-feed .ticker-row[data-feed="bbc"] .agency { color: #ffb347; }
+.breaking-feed .ticker-row[data-feed="bloomberg"] .agency { color: #c5a3ff; }
+.breaking-feed .ticker-row[data-feed="wsj"] .agency { color: #c8bfa3; }
+.breaking-feed .ticker-row[data-feed="nyt"] .agency { color: #dddddd; }
+.breaking-feed .ticker-row[data-feed="wp"] .agency { color: #a88cff; }
+.breaking-feed .ticker-row[data-feed="guardian"] .agency { color: #4ca6ff; }
+.breaking-feed .ticker-row[data-feed="cnn"] .agency { color: #e04b4b; }
+
+/* Ticker track aligned left */
+.breaking-feed .ticker-track {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  padding-left: 6px;
+}
+
+/* Moving headlines */
+.breaking-feed .ticker-content {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 14px;
+  color: #b8b8b8;
+  animation: tickerMove 75s linear infinite;
+}
+
+/* Smooth continuous motion */
+@keyframes tickerMove {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Urgent headline highlight */
+.breaking-feed .urgent {
+  color: #ff4c4c;
+  font-weight: 700;
+}
+
+/* Subtle feed update glow */
+.breaking-feed .ticker-row.flash {
+  box-shadow: 0 0 12px rgba(0, 224, 255, 0.25);
+  transition: box-shadow 0.6s ease;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+/* 98% WIDTH SEPARATOR ACROSS ENTIRE TILE */
+.breaking-feed .ticker-row {
+  position: relative;
+}
+
+.breaking-feed .ticker-row::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 2%;
+  width: 98%;        
+  height: 1px;
+  background: #1a1a1a;
+}
+
+/* ========================= */
+/* TWO COLUMN FEED LAYOUT   */
+/* ========================= */
+
+.breaking-feed .feed-columns {
+  display: flex;            /* side by side */
+  flex-direction: row;
+  width: 100%;
+  gap: 0;
+  flex-wrap: nowrap; 
+}
+
+.breaking-feed .feed-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================= */
+/* POPUP MODAL               */
+/* ========================= */
+
+/* Modal overlay */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(2px); /* subtle blur */
+    transition: opacity 0.3s ease;
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #111;
+    color: rgb(207, 199, 199);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 18px 16px;
+    width: 80%;
+    max-width: 600px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* tighter spacing */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Gradient overlay */
+.modal-content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 255, 255, 0.02) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Ensure modal content sits above gradient */
+.modal-content > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Close button */
+.modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+    transition: color 0.2s ease;
+    z-index: 10;
+}
+
+/* Modal title */
+.modal-content .settings-title {
+    padding: 10px 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 18px;
+}
+
+/* ========================= */
+/* FEED LAYOUT               */
+/* ========================= */
+
+/* Stack feed sections vertically */
+.modal-content .settings-columns {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* reduced gap */
+}
+
+/* Each feed section */
+.modal-content .feed-column {
+    display: flex;
+    flex-direction: column;
+    background: #0a0a0a;
+    padding: 4px; /* reduced padding */
+    overflow: hidden;
+    transition: background 0.3s ease;
+}
+
+.modal-content .feed-column:hover {
+    background: #111111;
+}
+
+.modal-content .feed-column-title {
+    display: flex;
+    flex-direction: column;
+    background: #0a0a0a;
+    padding: 4px; /* reduced padding */
+    overflow: hidden;
+    transition: background 0.3s ease;
+}
+
+/* Section headers */
+.modal-content .settings-header {
+    font-size: 16px;
+    font-weight: 700;
+    color: #a69a9d;
+    padding: 3px 0 1px 12px; /* tighter padding */
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.modal-content .settings-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 2%;
+    width: 96%;        
+    height: 1px;
+    background: #1a1a1a;
+}
+
+/* Channels grid */
+.modal-content .channels-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 8px; /* tighter grid */
+}
+
+.modal-content .channels-grid .settings-option-row { 
+    width: 100%; 
+    display: flex; 
+    align-items: center; 
+    font-size: 14px; 
+    padding: 1px 4px 1px 12px; /* tighter padding */
+    transition: background 0.2s ease;
+}
+
+.modal-content .channels-grid .settings-option-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Input container */
+.input {
+    font-weight: 100;
+    width: 150px;
+    margin: 0 auto;
+}
+
+/* Input field */
+.input input[type="text"] {
+    color: white;
+    width: 100%;
+    padding: 2px 4px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 100;
+    border: none;
+    border-bottom: 1px solid rgb(187, 175, 175);
+    background-color: rgba(0, 0, 0, 0.05);
+    outline: none;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+/* Focus effect */
+.input input[type="text"]:focus {
+    border-bottom-color: #fdfdfd;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* ========================= */
+/* SETTINGS PANEL LAYOUT */
+/* ========================= */
+
+.tile.settings-panel{
+  height:100%;
+  width:100%;
+  position:relative;
+}
+
+/* divider */
+
+.settings-panel::after{
+  content:"";
+  position:absolute;
+  top:75%;
+  left:0;
+  width:100%;
+  height:4px;
+  transform:translateY(-50%);
+  background:linear-gradient(
+    0deg,
+    rgba(33,33,33,1) 20%,
+    rgba(41,41,84,1) 80%
+  );
+  box-shadow:0 0 6px rgba(13,210,236,0.2);
+  z-index:5;
+}
+
+/* grid layout */
+
+.settings-layout{
+  display:grid;
+  grid-template-rows:75% 25%;
+  height:100%;
+  width:100%;
+}
+
+/* ========================= */
+/* WORLD CLOCK */
+/* ========================= */
+.clock-panel{
+  display:flex;
+  flex-direction:column;
+  background:#080808;
+  position:relative;
+  overflow:hidden;
+}
+
+/* scanlines */
+.clock-panel::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.02),
+    rgba(255,255,255,0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity:0.25;
+  pointer-events:none;
+}
+
+/* header */
+
+.clock-header{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:2px;
+  color:#9aa0a6;
+  padding:6px 12px;
+  position:relative;
+}
+
+.clock-header::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:4%;
+  width:196%;
+  height:1px;
+  background:#1a1a1a;
+}
+
+/* columns container */
+.clock-columns{
+  display:flex;
+  flex:1;
+  gap: 2%;
+}
+
+/* individual column */
+.feed-column-clock{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+/* rows */
+.clock-option-row{
+  display:flex;
+  align-items:center;
+  height:24px;
+  position:relative;
+}
+
+.clock-option-row::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:4%;
+  width:96%;
+  height:1px;
+  background:#1a1a1a;
+}
+
+/* city */
+.clock-option-clock{
+  width:70px;
+  padding-left:12px;
+  font-size:12px;
+  font-weight:700;
+  color:#dcdcdc;
+}
+
+/* time */
+.clock-track{
+  flex:1;
+  padding-left:6px;
+  overflow: visible; /* no scrolling */
+}
+
+.ticker-content{
+  font-size:14px;
+  color:#b8b8b8;
+}
+
+/* ========================= */
+/* SETTINGS AREA              */
+/* ========================= */
+.settings-left {
+  position: relative;         /* container for ::after */
+  display: flex;              /* flex container for centering */
+  justify-content: center;    /* horizontal center */
+  align-items: center;        /* vertical center */
+  width: 100%;
+  height: 100%;               /* must be ensured parent has height */
+  background: #080808;
+  overflow: hidden;
+}
+
+/* scanlines covering the entire div */
+.settings-left::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.02),
+    rgba(255,255,255,0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0; /* below icon */
+}
+
+/* icon */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #9aa0a6;
+  z-index: 1;                 /* above scanlines */
+  transition: color 0.3s, filter 0.3s;
+}
+
+.icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.icon:hover {
+  color: #0dd2ec;
+  filter: drop-shadow(0 0 4px #0dd2ec);
+}
