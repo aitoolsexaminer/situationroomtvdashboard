@@ -128,3 +128,33 @@ modal.style.display = "none";
 });
 
 });
+
+
+function launchFullscreen() {
+
+const el = document.documentElement;
+
+if (el.requestFullscreen) el.requestFullscreen();
+else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+else if (el.msRequestFullscreen) el.msRequestFullscreen();
+
+const start = document.getElementById("startScreen");
+if (start) start.style.display = "none";
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+const startModal = document.getElementById("startScreen");
+const startBox = document.querySelector(".modal-start-content");
+const closeBtn = document.querySelector(".start-close");
+
+if (startBox) {
+startBox.addEventListener("click", launchFullscreen, { once: true });
+}
+
+if (closeBtn) {
+closeBtn.addEventListener("click", launchFullscreen, { once: true });
+}
+
+});
