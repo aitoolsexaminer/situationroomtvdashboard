@@ -4,24 +4,25 @@
   <meta charset="UTF-8">
   <title>Situation Room TV Dashboard</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;400;600;700&display=swap" rel="stylesheet">
-  
+  <<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;300;400;500;600;700&display=swap" rel="stylesheet">
   
 </head>
 <body>
-	
-		<div id="startModal" class="modal">
- 			<div class="modal-content">
-				<h2>Situation Room Dashboard</h2>
-					<p> The window will open in fullscreen mode for btettwer experience.
-						<br>You can toggle between <b>Esc</b> and <esc>F11</esc> buttons for your preferred experience.</p>
-			<div style="margin-top:20px; text-align:right;">
-      		<button id="startOk">OK</button>
-    	</div>
 
-  </div>
-</div>
-	
+    
+    <div id="startScreen">
+      <div class="start-content">
+        <h1>Situation Room TV Dashboard</h1>
+          <p>The page will open in full-screen mode for a better experience. 
+          <br>You can switch the view using the <kbd>Esc</kbd> and <kbd>F11</kbd> keys. </p>
+
+          <button id="startOk">OK</button>
+
+      </div>
+    </div>
+
+          
+
   <div class="viewport">
     <div class="wall">
       <div class="dashboard">
@@ -29,9 +30,9 @@
 
       <!-- Row 1 -->
       <div class="tile" data-number="1"><div class="tile-inner"><iframe width="560" height="315" src="https://www.youtube.com/embed/pQSTFsOtrH0?si=-6EIbY2AddgNjxRq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div> <div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="2"><div class="tile-inner"><iframe src="https://www.youtube.com/embed/ZgzGIduKmHw-Ca9W?autoplay=1&mute=1"></iframe></div> <div class="broadcast-icon"></div> <div class="broadcast-icon"></div></div>
+      <div class="tile" data-number="2"><div class="tile-inner"><iframe src="https://www.youtube.com/embed/ZgzGIduKmHw-Ca9W"></iframe></div> <div class="broadcast-icon"></div> <div class="broadcast-icon"></div></div>
       <div class="tile" data-number="3"><div class="tile-inner"><iframe src="https://live-hls-web-aje.getaj.net/AJE/index.m3u8"></iframe></div> <div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="4"><div class="tile-inner"><iframe src="https://www.youtube.com/embed/bNyUyrR0PHo?autoplay=1&mute=1"></iframe></div> <div class="broadcast-icon"></div></div>
+      <div class="tile" data-number="4"><div class="tile-inner"><iframe src="https://www.youtube.com/embed/bNyUyrR0PHo"></iframe></div> <div class="broadcast-icon"></div></div>
       <div class="tile" data-number="5"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
       <div class="tile" data-number="6"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
 
@@ -41,7 +42,7 @@
 
       <div class="tile main-feed">
         <div class="tile-inner">
-          <iframe src="https://example.com"></iframe>
+          <iframe id="mainFeedFrame" src="https://example.com"></iframe>
             <div class="control-stack">
             <div class="control-btn fullscreen"></div>
             <div class="control-btn mute"></div>
@@ -474,6 +475,7 @@
   
   </div>
 </div>
+
 
 </body>
 
