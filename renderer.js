@@ -130,30 +130,32 @@ modal.style.display = "none";
 });
 
 
-function launchFullscreen() {
+function startDashboard() {
 
 const el = document.documentElement;
 
-if (el.requestFullscreen) el.requestFullscreen();
-else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-else if (el.msRequestFullscreen) el.msRequestFullscreen();
+if (el.requestFullscreen) {
+  el.requestFullscreen();
+} else if (el.webkitRequestFullscreen) {
+  el.webkitRequestFullscreen();
+} else if (el.msRequestFullscreen) {
+  el.msRequestFullscreen();
+}
 
-const start = document.getElementById("startScreen");
-if (start) start.style.display = "none";
+const modal = document.getElementById("startModal");
+if (modal) modal.style.display = "none";
 
 }
 
 document.addEventListener("DOMContentLoaded", () => {
 
-const startModal = document.getElementById("startScreen");
-const startBox = document.querySelector(".modal-start-content");
-const closeBtn = document.querySelector(".start-close");
+const okButton = document.getElementById("startOk");
 
-if (startBox) {
-startBox.addEventListener("click", launchFullscreen, { once: true });
+if (okButton) {
+  okButton.addEventListener("click", startDashboard);
 }
 
-if (closeBtn) {
+});
 closeBtn.addEventListener("click", launchFullscreen, { once: true });
 }
 
