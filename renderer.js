@@ -201,11 +201,18 @@ function resizeDashboard(){
   const dashboard = document.querySelector(".dashboard");
   if(!dashboard) return;
 
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+  const baseWidth = 1920;
+  const baseHeight = 900;
 
-  dashboard.style.width = width + "px";
-  dashboard.style.height = height + "px";
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+
+  const scale = Math.min(
+    screenWidth / baseWidth,
+    screenHeight / baseHeight
+  );
+
+  dashboard.style.transform = `scale(${scale})`;
 
 }
 
@@ -222,8 +229,8 @@ function initDashboard(){
 
   const mainFrame=document.getElementById("mainFeedFrame");
 
-  //window.addEventListener("resize", resizeDashboard);
-  //window.addEventListener("load", resizeDashboard);
+  window.addEventListener("resize", resizeDashboard);
+  window.addEventListener("load", resizeDashboard);
 
 /* =========================
    MAIN FEED CONTROLS
