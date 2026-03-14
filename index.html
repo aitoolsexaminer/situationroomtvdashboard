@@ -3,265 +3,339 @@
 <head>
   <meta charset="UTF-8">
   <title>Situation Room TV Dashboard</title>
+
   <link rel="stylesheet" href="style.css">
-  <<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;300;400;500;600;700&display=swap" rel="stylesheet">
-  
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    
-    <div id="startScreen">
-      <div class="start-content">
-        <h1>Situation Room TV Dashboard</h1>
-          <p>The page will open in full-screen mode for a better experience. 
-          <br>You can switch the view using the <kbd>Esc</kbd> and <kbd>F11</kbd> keys. </p>
+  <div id="startScreen">
+    <div class="start-content">
+      <div id="main-start">
+      <h1>Situation Room TV Dashboard</h1>
 
-          <button id="startOk">OK</button>
+      <p class ="starttext">
+        The application is designed to work best on large screens.
+        <br>It can be heavy on system and browser resources, so it runs best on powerful computers with modern browsers.
+        <br>
+        <br>
+        The page will open in full-screen mode for a better experience.
+        <br>
+        You can switch the view using the <kbd>Esc</kbd> and <kbd>F11</kbd> keys.
+      </p>
+      
+              
+          <div class="start-actions">
+             <button id="startOk">OK</button>
+         <a href="#" id="about-link" class="about-toggle">About</a>
+        </div>
 
-      </div>
     </div>
 
-          
+            <div id="about-content" class="about-panel">
+              <h2>About This Dashboard</h2>
+              <h3>• Version 1.0 •</h3>
+             
+              <div class="about-scroll">
+
+              <h4>What is Lorem Ipsum?</h4>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+              
+              <h4>Where does it come from?</h4>
+              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+              <br>  
+              The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+
+              <h4>Why do we use it?</h4>
+              <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+
+              <h4>Where can I get some?</h4>
+              <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+
+              </div>
+
+              <button id="about-close" class="about-toggle">Back</button>
+            </div>
+
+  </div>
+</div>
+
+   
+
 
   <div class="viewport">
-    <div class="wall">
-      <div class="dashboard">
+    
+    <div class="dashboard">
+
+              <div class="tile main-feed">
+              
+
+                <iframe id="mainFeedFrame"></iframe>
+
+                  <video id="mainFeedVideo"
+                         autoplay
+                         playsinline
+                         style="display:none;"></video>
+
+                <div id="channelOverlay" class="channel-overlay"></div>
+
+                <!-- DEFAULT LEGEND -->
+                <div class="legend">
+
+                  <div class="legend-row">
+                    <div class="icon broadcast"></div>
+                    <span>Cast channel to the primary window.<br> Or press its assigned keyboard number.</span>
+                  </div>
+
+                  <div class="legend-row">
+                    <div class="icon fullscreen"></div>
+                    <span>[f] Enter fullscreen mode for the primary window.</span>
+                  </div>
+
+                  <div class="legend-row">
+                    <div class="icon unmute"></div>
+                    <span>[m] Mute or unmute audio in the primary window.</span>
+                  </div>
+
+                  <div class="legend-row">
+                    <div class="icon dim"></div>
+                    <span>[d] Dim the other windows except primary window.</span>
+                  </div>
+
+                  <div class="legend-row">
+                    <div class="icon settings"></div>
+                    <span> [s] Open settings<br> [modify Channels, World Clock, and News agencies]
+                    </span>
+                  </div>
+
+                </div>
+               
+ 
+
+                <div class="control-stack">
+                  <div class="control-btn fullscreen" data-control="fullscreen"></div>
+                  <div class="control-btn mute unmute" data-control="mute"></div>
+                  <div class="control-btn dim" data-control="dim"></div>
+                </div>
+
+              
+            </div>
 
 
-      <!-- Row 1 -->
-      <div class="tile" data-number="1"><div class="tile-inner"><iframe width="560" height="315" src="https://www.youtube.com/embed/pQSTFsOtrH0?si=-6EIbY2AddgNjxRq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div> <div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="2"><div class="tile-inner"><iframe src="https://www.youtube.com/embed/ZgzGIduKmHw-Ca9W"></iframe></div> <div class="broadcast-icon"></div> <div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="3"><div class="tile-inner"><iframe src="https://live-hls-web-aje.getaj.net/AJE/index.m3u8"></iframe></div> <div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="4"><div class="tile-inner"><iframe src="https://www.youtube.com/embed/bNyUyrR0PHo"></iframe></div> <div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="5"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="6"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
+            
 
-      <!-- Row 2 -->
-      <div class="tile" data-number="7"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="8"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
 
-      <div class="tile main-feed">
-        <div class="tile-inner">
-          <iframe id="mainFeedFrame" src="https://example.com"></iframe>
-            <div class="control-stack">
-            <div class="control-btn fullscreen"></div>
-            <div class="control-btn mute"></div>
-            <div class="control-btn dim"></div>
-        </div>
-      </div>
+            <!-- Row 5 -->
+
+            <div class="tile clock-settings-panel">
+
+              <div class="clock-settings-layout">
+
+
+                <!-- WORLD CLOCK -->
+
+                <div class="clock-panel">
+
+                  <div class="clock-header">WORLD CLOCK</div>
+
+                  <div class="clock-columns"> 
+
+                    <div class="feed-column-clock">
+
+                      <!-- DC -->
+                      <div class="clock-option-row">
+                      <div class="clock-option-clock" data-clock-label="time-dc">DC</div>
+                      <div class="clock-track">
+                        <div class="ticker-content" id="time-dc"></div>
+                      </div>
+                    </div>
+
+                      <!-- GMT -->
+                      <div class="clock-option-row">
+                      <div class="clock-option-clock" data-clock-label="time-gmt">GMT</div>
+                      <div class="clock-track">
+                        <div class="ticker-content" id="time-gmt"></div>
+                      </div>
+                    </div>
+
+                      <!-- BEIRUT -->
+                      <div class="clock-option-row">
+                      <div class="clock-option-clock" data-clock-label="time-bei">BEIRUT</div>
+                      <div class="clock-track">
+                        <div class="ticker-content" id="time-bei"></div>
+                      </div>
+                    </div>
+
+                    </div>
+
+
+                    <div class="feed-column-clock">
+
+                      <!-- TEL AVIV -->
+                      <div class="clock-option-row">
+                      <div class="clock-option-clock" data-clock-label="time-telaviv">TEL AVIV</div>
+                      <div class="clock-track">
+                        <div class="ticker-content" id="time-telaviv"></div>
+                      </div>
+                    </div>
+
+                      <!-- TEHRAN -->
+                      <div class="clock-option-row">
+                      <div class="clock-option-clock" data-clock-label="time-tehran">TEHRAN</div>
+                      <div class="clock-track">
+                        <div class="ticker-content" id="time-tehran"></div>
+                      </div>
+                    </div>
+
+                      <!-- TOKYO -->
+                      <div class="clock-option-row">
+                      <div class="clock-option-clock" data-clock-label="time-tokyo">TOKYO</div>
+                      <div class="clock-track">
+                        <div class="ticker-content" id="time-tokyo"></div>
+                      </div>
+                    </div>
+
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <!-- SETTINGS -->
+
+                <div class="settings-column settings-section">
+                  <div class="icon-settings"></div>
+                </div>
+
+                </div>
+              </div>
+            
+
+
+            <div class="tile breaking-feed">
+
+              <div class="control-header">GLOBAL NEWS MONITOR</div>
+
+              <div class="feed-columns">
+
+                <div class="feed-column">
+
+                  <div class="ticker-row" data-feed="Reuters" data-slot="0">
+                    <div class="agency">REUTERS</div>
+                    <div class="ticker-track">
+                      <div class="ticker-content"></div>
+                    </div>
+                  </div>
+
+                  <div class="ticker-row" data-feed="AFP" data-slot="1">
+                    <div class="agency">AFP</div>
+                    <div class="ticker-track">
+                      <div class="ticker-content"></div>
+                    </div>
+                  </div>
+
+                  <div class="ticker-row" data-feed="AP" data-slot="2">
+                    <div class="agency">AP</div>
+                    <div class="ticker-track">
+                      <div class="ticker-content"></div>
+                    </div>
+                  </div>
+
+                  <div class="ticker-row" data-feed="Bloomberg" data-slot="3">
+                    <div class="agency">Bloomberg</div>
+                    <div class="ticker-track">
+                      <div class="ticker-content"></div>
+                    </div>
+                  </div>
+
+                  <div class="ticker-row" data-feed="CNN" data-slot="4">
+                    <div class="agency">CNN</div>
+                    <div class="ticker-track">
+                      <div class="ticker-content"></div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="feed-column">
+
+                  <div class="ticker-row" data-feed="AlJazeera_ar" data-slot="5">
+                    <div class="agency">AlJazeera</div>
+                    <div class="ticker-track">
+                      <div class="ticker-content"></div>
+                    </div>
+                  </div>
+
+                  <div class="ticker-row" data-feed="AlArabiya_ar" data-slot="6">
+                    <div class="agency">AlArabiya</div>
+                    <div class="ticker-track">
+                      <div class="ticker-content"></div>
+                    </div>
+                  </div>
+
+                  <div class="ticker-row" data-feed="France24_ar" data-slot="7">
+                    <div class="agency">France24</div>
+                    <div class="ticker-track">
+                      <div class="ticker-content"></div>
+                    </div>
+                  </div>
+
+                  <div class="ticker-row" data-feed="RT_ar" data-slot="8">
+                    <div class="agency">RT</div>
+                    <div class="ticker-track">
+                      <div class="ticker-content"></div>
+                    </div>
+                  </div>
+
+                  <div class="ticker-row" data-feed="AsharqAwsat" data-slot="9">
+                    <div class="agency">AsharqAwsat</div>
+                    <div class="ticker-track">
+                      <div class="ticker-content"></div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="tile world-monitor" data-number="21">
+              <div class="tile-inner">
+                <iframe src="https://worldmonitor.app"></iframe>
+              </div>
+              <div class="broadcast-icon"></div>
+            </div>
+
+
+            <div class="tile live-map" data-number="22">
+              <div class="tile-inner">
+                <iframe src="https://lebanon.liveuamap.com/"></iframe>
+              </div>
+              <div class="broadcast-icon"></div>
+            </div>
+
+
     </div>
-
-      <div class="tile" data-number="9"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="10"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
-
-      <!-- Row 3 -->
-      <div class="tile" data-number="11"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="12"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="13"><div class="broadcast-icon"></div><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div></div>
-      <div class="tile" data-number="14"><div class="broadcast-icon"></div><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div></div>
-
-      <!-- Row 4 -->
-      <div class="tile" data-number="15"><div class="broadcast-icon"></div><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div></div>
-      <div class="tile" data-number="16"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="17"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="18"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="19"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
-      <div class="tile" data-number="20"><div class="tile-inner"><iframe src="https://youtu.be/embed/bNyUyrR0PHo"></iframe></div><div class="broadcast-icon"></div></div>
-
-      <!-- Row 5 -->
-     <div class="tile settings-panel">
-
-  <div class="settings-layout">
-
-    <!-- WORLD CLOCK -->
-    <div class="breaking-feed clock-panel">
-
-      <div class="clock-header">WORLD CLOCK</div>
-
-      <div class="clock-columns">
-
-        <!-- Column 1 -->
-        <div class="feed-column-clock">
-
-          <div class="clock-option-row">
-            <div class="clock-option-clock">DC</div>
-            <div class="clock-track">
-              <div class="ticker-content" id="time-dc"></div>
-            </div>
-          </div>
-
-          <div class="clock-option-row">
-            <div class="clock-option-clock">GMT</div>
-            <div class="clock-track">
-              <div class="ticker-content" id="time-gmt"></div>
-            </div>
-          </div>
-
-          <div class="clock-option-row">
-            <div class="clock-option-clock">BEIRUT</div>
-            <div class="clock-track">
-              <div class="ticker-content" id="time-bei"></div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Column 2 -->
-        <div class="feed-column-clock">
-
-          <div class="clock-option-row">
-            <div class="clock-option-clock">TEL AVIV</div>
-            <div class="clock-track">
-              <div class="ticker-content" id="time-telaviv"></div>
-            </div>
-          </div>
-
-          <div class="clock-option-row">
-            <div class="clock-option-clock">TEHRAN</div>
-            <div class="clock-track">
-              <div class="ticker-content" id="time-tehran"></div>
-            </div>
-          </div>
-
-          <div class="clock-option-row">
-            <div class="clock-option-clock">TOKYO</div>
-            <div class="clock-track">
-              <div class="ticker-content" id="time-tokyo"></div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- SETTINGS -->
-    <div class="settings-column settings-left">
-      
-  <div class="icon">
-    <svg xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 24 24"
-         fill="none"
-         stroke="currentColor"
-         stroke-width="2">
-      <circle cx="12" cy="12" r="3"/>
-      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82
-               l.06.06a2 2 0 1 1-2.83 2.83
-               l-.06-.06a1.65 1.65 0 0 0-1.82-.33
-               1.65 1.65 0 0 0-1 1.51V21
-               a2 2 0 1 1-4 0v-.09
-               a1.65 1.65 0 0 0-1-1.51
-               1.65 1.65 0 0 0-1.82.33
-               l-.06.06a2 2 0 1 1-2.83-2.83
-               l.06-.06a1.65 1.65 0 0 0 .33-1.82
-               1.65 1.65 0 0 0-1.51-1H3
-               a2 2 0 1 1 0-4h.09
-               a1.65 1.65 0 0 0 1.51-1
-               1.65 1.65 0 0 0-.33-1.82
-               l-.06-.06a2 2 0 1 1 2.83-2.83
-               l.06.06a1.65 1.65 0 0 0 1.82.33
-               h.09a1.65 1.65 0 0 0 1-1.51V3
-               a2 2 0 1 1 4 0v.09
-               a1.65 1.65 0 0 0 1 1.51
-               1.65 1.65 0 0 0 1.82-.33
-               l.06-.06a2 2 0 1 1 2.83 2.83
-               l-.06.06a1.65 1.65 0 0 0-.33 1.82
-               v.09a1.65 1.65 0 0 0 1.51 1H21
-               a2 2 0 1 1 0 4h-.09
-               a1.65 1.65 0 0 0-1.51 1z"/>
-    </svg>
-  
-</div>
-
-    </div>
-
   </div>
 
-</div>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
-      <div class="tile breaking-feed">
-        <div class="control-header">GLOBAL NEWS MONITOR</div>
-
-        <div class="feed-columns">
-
-          <!-- LEFT COLUMN -->
-          <div class="feed-column">
-            <div class="ticker-row" data-feed="reuters">
-              <div class="agency">REUTERS</div>
-              <div class="ticker-track"><div class="ticker-content"></div></div>
-            </div>
-
-            <div class="ticker-row" data-feed="afp">
-              <div class="agency">AFP</div>
-              <div class="ticker-track"><div class="ticker-content"></div></div>
-            </div>
-
-            <div class="ticker-row" data-feed="ap">
-              <div class="agency">AP</div>
-              <div class="ticker-track"><div class="ticker-content"></div></div>
-            </div>
-
-            <div class="ticker-row" data-feed="bbc">
-              <div class="agency">BBC</div>
-              <div class="ticker-track"><div class="ticker-content"></div></div>
-            </div>
-
-            <div class="ticker-row" data-feed="bloomberg">
-              <div class="agency">BLOOMBERG</div>
-              <div class="ticker-track"><div class="ticker-content"></div></div>
-            </div>
-
-          </div>
-
-          <!-- RIGHT COLUMN -->
-          <div class="feed-column">
-            <div class="ticker-row" data-feed="wsj">
-              <div class="agency">WSJ</div>
-              <div class="ticker-track"><div class="ticker-content"></div></div>
-            </div>
-
-            <div class="ticker-row" data-feed="nyt">
-              <div class="agency">NYT</div>
-              <div class="ticker-track"><div class="ticker-content"></div></div>
-            </div>
-
-            <div class="ticker-row" data-feed="wp">
-              <div class="agency">WP</div>
-              <div class="ticker-track"><div class="ticker-content"></div></div>
-            </div>
-
-            <div class="ticker-row" data-feed="guardian">
-              <div class="agency">GUARDIAN</div>
-              <div class="ticker-track"><div class="ticker-content"></div></div>
-            </div>
-
-            <div class="ticker-row" data-feed="cnn">
-              <div class="agency">CNN</div>
-              <div class="ticker-track"><div class="ticker-content"></div></div>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-
-      <div class="tile world-monitor" data-number="21">
-        <div class="tile-inner"><iframe src="https://worldmonitor.app"></iframe><div class="broadcast-icon"></div></div>
-      </div>
-
-      <div class="tile live-map" data-number="22">
-        <div class="tile-inner"><iframe src="https://lebanon.liveuamap.com/"></iframe><div class="broadcast-icon"></div></div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<script src="renderer.js"></script>
+  <script src="rss.js"></script>
+  <script src="worldclock.js"></script>
+  <script src="renderer.js" defer></script>
+  <script src="modals.js"></script>
+  <script src="channelManager.js" defer></script>
+  <script src="channels.js"></script>
 
 
-<!-- POPUP MODAL -->
+
+
+
+
+<!-- SETTINGS POPUP MODAL -->
 <div id="Modal" class="modal">
   <div class="modal-content">
     
@@ -274,202 +348,357 @@
     <div class="settings-columns">
 
       <!-- Left Column: Channels -->
-      <div class="feed-column">
+      <div class="modal-feed-column">
         <div class="settings-header">Channels</div>
         <div class="channels-grid">
-            <div class="settings-option-row" data-feed="channel1"><div class="settings-option">Channel 1</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 1">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel2"><div class="settings-option">Channel 2</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 2">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel3"><div class="settings-option">Channel 3</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 3">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel4"><div class="settings-option">Channel 4</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 4">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel5"><div class="settings-option">Channel 5</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 5">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel6"><div class="settings-option">Channel 6</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 6">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel7"><div class="settings-option">Channel 7</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 7">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel8"><div class="settings-option">Channel 8</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 8">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel9"><div class="settings-option">Channel 9</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 9">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel10"><div class="settings-option">Channel 10</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 10">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel11"><div class="settings-option">Channel 11</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 11">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel12"><div class="settings-option">Channel 12</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 12">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel13"><div class="settings-option">Channel 13</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 13">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel14"><div class="settings-option">Channel 14</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 14">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel15"><div class="settings-option">Channel 15</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 15">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel16"><div class="settings-option">Channel 16</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 16">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel17"><div class="settings-option">Channel 17</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 17">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel18"><div class="settings-option">Channel 18</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 18">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel19"><div class="settings-option">Channel 19</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 19">
-		</div></div>
-            <div class="settings-option-row" data-feed="channel20"><div class="settings-option">Channel 20</div>
-            <div class="input">
- 		 <input type="text" placeholder="Channel 20">
-		</div></div>
+
+
+        <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="0" placeholder="Channel 1">
+                <button class="channel-plus-btn" data-slot="0">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="1" placeholder="Channel 2">
+                <button class="channel-plus-btn" data-slot="1">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="2" placeholder="Channel 3">
+                <button class="channel-plus-btn" data-slot="2">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="3" placeholder="Channel 4">
+                <button class="channel-plus-btn" data-slot="3">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="4" placeholder="Channel 5">
+                <button class="channel-plus-btn" data-slot="4">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="5" placeholder="Channel 6">
+                <button class="channel-plus-btn" data-slot="5">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="6" placeholder="Channel 7">
+                <button class="channel-plus-btn" data-slot="6">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="7" placeholder="Channel 8">
+                <button class="channel-plus-btn" data-slot="7">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="8" placeholder="Channel 9">
+                <button class="channel-plus-btn" data-slot="8">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="9" placeholder="Channel 10">
+                <button class="channel-plus-btn" data-slot="9">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="10" placeholder="Channel 11">
+                <button class="channel-plus-btn" data-slot="10">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="11" placeholder="Channel 12">
+                <button class="channel-plus-btn" data-slot="11">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="12" placeholder="Channel 13">
+                <button class="channel-plus-btn" data-slot="12">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="13" placeholder="Channel 14">
+                <button class="channel-plus-btn" data-slot="14">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="14" placeholder="Channel 15">
+                <button class="channel-plus-btn" data-slot="14">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="15" placeholder="Channel 16">
+                <button class="channel-plus-btn" data-slot="15">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="16" placeholder="Channel 17">
+                <button class="channel-plus-btn" data-slot="16">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="17" placeholder="Channel 18">
+                <button class="channel-plus-btn" data-slot="17">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="18" placeholder="Channel 19">
+                <button class="channel-plus-btn" data-slot="18">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+              <input class="channel-search" data-slot="19" placeholder="Channel 20">
+                <button class="channel-plus-btn" data-slot="19">+</button>
+              </div>
+              <div class="channel-results"></div>
+            </div>
+
+             
+
+
           </div>
-</div>     
+      </div>     
       </div>
 
-      <!-- Middle Column: News -->
-      <div class="feed-column">
-        <div class="settings-header">News</div>
-        <div class="channels-grid">
-        <div class="settings-option-row" data-feed="news1">
-          <div class="settings-option">News 1</div>
-          <div class="input">
- 		 <input type="text" placeholder="Agency 1">
-		</div>          
-        </div>
- 	<div class="settings-option-row" data-feed="news2">
-          <div class="settings-option">News 2</div>
-          <div class="input">
- 		 <input type="text" placeholder="Agency 2">
-		</div>
-        </div> 
-	<div class="settings-option-row" data-feed="news3">
-          <div class="settings-option">News 3</div>
-          <div class="input">
- 		 <input type="text" placeholder="Agency 3">
-		</div>
-        </div>
-        <div class="settings-option-row" data-feed="news4">
-          <div class="settings-option">News 4</div>
-          <div class="input">
- 		 <input type="text" placeholder="Agency 4">
-		</div>
-        </div>
- 	<div class="settings-option-row" data-feed="news5">
-          <div class="settings-option">News 5</div>
-          <div class="input">
- 		 <input type="text" placeholder="Agency 5">
-		</div>
-        </div>
- 	<div class="settings-option-row" data-feed="news6">
-          <div class="settings-option">News 6</div>
-          <div class="input">
- 		 <input type="text" placeholder="Agency 6">
-		</div>
-        </div>
- 	<div class="settings-option-row" data-feed="news7">
-          <div class="settings-option">News 7</div>
-          <div class="input">
- 		 <input type="text" placeholder="Agency 7">
-		</div>
-        </div>
-  	<div class="settings-option-row" data-feed="news8">
-          <div class="settings-option">News 8</div>
-          <div class="input">
- 		 <input type="text" placeholder="Agency 8">
-		</div>
-        </div>
- 	<div class="settings-option-row" data-feed="news9">
-          <div class="settings-option">News 9</div>
-          <div class="input">
- 		 <input type="text" placeholder="Agency 9">
-		</div>
-        </div>
- 	<div class="settings-option-row" data-feed="news10">
-          <div class="settings-option">News 10</div>
-          <div class="input">
- 		 <input type="text" placeholder="Agency 10">
-		</div>
-        </div>
-      </div>
-      </div>
 
-      <!-- Right Column: World Clock -->
-      <div class="feed-column">
+        <!-- Settings Third Row: World Clock -->
+      <div class="modal-feed-column">
         <div class="settings-header">World Clock</div>
         <div class="channels-grid">
-        <div class="settings-option-row" data-feed="city1">
-          <div class="settings-option">City 1</div>
-          <div class="input">
- 		 <input type="text" placeholder="City 1">
-		</div>
-        </div>
-        <div class="settings-option-row" data-feed="city2">
-          <div class="settings-option">City 2</div>
-          <div class="input">
- 		 <input type="text" placeholder="City 2">
-		</div>
-        </div>
-        <div class="settings-option-row" data-feed="city3">
-          <div class="settings-option">City 3</div>
-          <div class="input">
-  		<input type="text" placeholder="City 3">
-		</div>
-        </div>
-        <div class="settings-option-row" data-feed="city4">
-          <div class="settings-option">City 4</div>
-          <div class="input">
-  		<input type="text" placeholder="City 4">
-		</div>
-        </div>
-        <div class="settings-option-row" data-feed="city5">
-          <div class="settings-option">City 5</div>
-          <div class="input">
- 		 <input type="text" placeholder="City 5">
-		</div>
-        </div>
-	<div class="settings-option-row" data-feed="city6">
-          <div class="settings-option">City 6</div>
-          <div class="input">
- 		 <input type="text" placeholder="City 6">
-		</div>
-        </div>
+       
+        <div class="settings-option-row">
+
+          <div class="input-with-plus">
+           <input class="city-search" data-slot="0" placeholder="DC">
+          <button class="city-plus-btn" data-slot="0">+</button>
+         
+       </div>
+              <div class="city-results"></div>
+            </div>
+
+
+            <div class="settings-option-row">
+              <div class="input-with-plus">
+                    <input class="city-search" data-slot="3" placeholder="Tel Aviv">
+                    <button class="city-plus-btn" data-slot="3">+</button>
+                  </div>
+                    <div class="city-results"></div>
+                  </div>
+
+              <div class="settings-option-row">
+                <div class="input-with-plus">
+                <input class="city-search" data-slot="1" placeholder="GMT">
+                <button class="city-plus-btn" data-slot="1">+</button>
+              </div>
+                  <div class="city-results"></div>
+                </div>
+
+
+                 <div class="settings-option-row">
+                                <div class="input-with-plus">
+
+                    <input class="city-search" data-slot="4" placeholder="Tehran">
+                                    <button class="city-plus-btn" data-slot="4">+</button>
+                  </div>
+                    <div class="city-results"></div>
+                  </div>
+
+              <div class="settings-option-row">
+                              <div class="input-with-plus">
+
+                    <input class="city-search" data-slot="2" placeholder="Beirut">
+                                    <button class="city-plus-btn" data-slot="2">+</button>
+                    </div>
+                    <div class="city-results"></div>
+                  </div>
+
+               <div class="settings-option-row">
+                              <div class="input-with-plus">
+
+                    <input class="city-search" data-slot="5" placeholder="Tokyo">
+                                    <button class="city-plus-btn" data-slot="5">+</button>
+                  </div>
+                    <div class="city-results"></div>
+                  </div>
         </div>
       </div>
+
+
+      <!-- Middle Column: News -->
+      <div class="modal-feed-column">
+        <div class="settings-header">Global News Monitor</div>
+          <div class="channels-grid">
+
+              <div class="settings-option-row">
+                    <div class="input-with-plus">
+                    <input class="agency-search" data-slot="0" placeholder="Reuters">
+                      <button class="news-plus-btn" data-slot="0">+</button>
+                    </div>
+                    <div class="agency-results"></div>
+                  </div>
+
+
+
+            <div class="settings-option-row">
+                            <div class="input-with-plus">
+
+              <input class="agency-search" data-slot="5" placeholder="AlJazeera_ar">
+                              <button class="news-plus-btn" data-slot="5">+</button>
+            </div>
+              <div class="agency-results"></div>
+            
+            </div>
+
+            <div class="settings-option-row">
+                            <div class="input-with-plus">
+
+              <input class="agency-search" data-slot="1" placeholder="Associated France Press">
+                              <button class="news-plus-btn" data-slot="1">+</button>
+                                 </div>
+              <div class="agency-results"></div>
+           
+            </div>
+
+            <div class="settings-option-row">
+                            <div class="input-with-plus">
+
+              <input class="agency-search" data-slot="6" placeholder="AlArabiya_ar">
+                              <button class="news-plus-btn" data-slot="6">+</button>
+                               </div>
+                              <div class="agency-results"></div>
+           
+            </div>
+    
+
+            <div class="settings-option-row">
+                            <div class="input-with-plus">
+
+              <input class="agency-search" data-slot="2" placeholder="Associated Press">
+                              <button class="news-plus-btn" data-slot="2">+</button>
+                              </div>
+              <div class="agency-results"></div>
+            
+            </div>
+
+            <div class="settings-option-row">
+                            <div class="input-with-plus">
+
+              <input class="agency-search" data-slot="7" placeholder="France24_ar">
+                              <button class="news-plus-btn" data-slot="7">+</button>
+                 </div>              
+              <div class="agency-results"></div>
+           
+            </div>
+
+            <div class="settings-option-row">
+                            <div class="input-with-plus">
+
+              <input class="agency-search" data-slot="3" placeholder="Bloomberg">
+                              <button class="news-plus-btn" data-slot="3">+</button>
+              </div>
+              <div class="agency-results"></div>
+            
+            </div>
+        
+
+
+             <div class="settings-option-row">
+                            <div class="input-with-plus">
+
+              <input class="agency-search" data-slot="8" placeholder="RT_ar>
+                              <button class="news-plus-btn" data-slot="8">+</button>
+              </div>
+              <div class="agency-results"></div>
+            
+             </div>
+
+
+         
+              <div class="settings-option-row">     
+                        <div class="input-with-plus">
+
+              <input class="agency-search" data-slot="4" placeholder="CNN">
+                              <button class="news-plus-btn" data-slot="4">+</button>
+              </div>                    
+              <div class="agency-results"></div>
+            
+               </div>
+
+              <div class="settings-option-row">
+                            <div class="input-with-plus">
+
+              <input class="agency-search" data-slot="9" placeholder="AsharqAwsat">
+                              <button class="news-plus-btn" data-slot="9">+</button>
+              </div>                    
+              <div class="agency-results"></div>
+            
+              </div>
+        </div>
+      </div>
+
+      
       </div>
     </div>
   
@@ -477,6 +706,241 @@
 </div>
 
 
-</body>
+<!-- CITY PICKER MODAL -->
 
+<div id="cityPickerModal" class="modal">
+
+  <div class="modal-content city-picker">
+
+    <div class="feed-column-title">
+      <div class="settings-title">Select City</div>
+      <span class="close city-close">&times;</span>
+    </div>
+
+    
+
+      <details id="region-americas" class="region">
+        <summary class="region-title">Americas</summary>
+        <div class="city-grid">
+        <div class="region-cities city-grid"></div>
+      </div>
+      </details>
+
+      <details id="region-europe" class="region">
+        <summary class="region-title">Europe</summary>
+        <div class="city-grid">
+        <div class="region-cities city-grid"></div>
+      </div>
+      </details>
+
+      <details id="region-middleeast" class="region">
+        <summary class="region-title">Middle East</summary>
+        <div class="city-grid">
+        <div class="region-cities city-grid"></div>
+      </div>
+      </details>
+
+      <details id="region-africa" class="region">
+        <summary class="region-title">Africa</summary>
+        <div class="city-grid">
+        <div class="region-cities city-grid"></div>
+      </div>
+      </details>
+
+      <details id="region-asia" class="region">
+         <summary class="region-title">Asia</summary>
+         <div class="city-grid">
+        <div class="region-cities"></div>
+      </div>
+      </details>
+
+      <details id="region-oceania" class="region">
+        <summary class="region-title">Oceania</summary>
+        <div class="city-grid">
+        <div class="region-cities city-grid"></div>
+      </div>
+      </details>
+
+    
+
+  </div>
+
+</div>
+
+
+
+<!-- NEWS PICKER MODAL -->
+
+<div id="newsPickerModal" class="modal">
+
+  <div class="modal-content news-picker">
+
+    <div class="feed-column-title">
+      <div class="settings-title">Select News Source</div>
+      <span class="close news-close">&times;</span>
+    </div>
+
+
+    
+      <details id="topic-arabi" class="news">
+        <summary class="topic-title">Arabic</summary>
+        <div class="news-grid">
+        <div class="list-agencies news-grid"></div>
+      </div>
+      </details>
+
+     <details id="topic-wires" class="news">
+        <summary class="topic-title">Global Wire Services</summary>
+        <div class="news-grid">
+        <div class="list-agencies news-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-major" class="news">
+        <summary class="topic-title">Major International Outlets</summary>
+        <div class="news-grid">
+        <div class="list-agencies news-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-us" class="news">
+        <summary class="topic-title">US Newspapers</summary>
+        <div class="news-grid">
+        <div class="list-agencies news-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-finance" class="news">
+        <summary class="topic-title">Financial / Markets</summary>
+        <div class="news-grid">
+        <div class="list-agencies news-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-tech" class="news">
+        <summary class="topic-title">Technology</summary>
+        <div class="news-grid">
+        <div class="list-agencies news-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-middleeast" class="news">
+        <summary class="topic-title">Middle East</summary>
+        <div class="news-grid">
+        <div class="list-agencies news-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-europe" class="news">
+        <summary class="topic-title">Europe</summary>
+        <div class="news-grid">
+        <div class="list-agencies news-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-asia" class="news">
+        <summary class="topic-title">Asia</summary>
+        <div class="news-grid">
+        <div class="list-agencies news-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-russia" class="news">
+        <summary class="topic-title">Russia / Eastren Europe</summary>
+        <div class="news-grid">
+        <div class="list-agencies news-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-analysis" class="news">
+        <summary class="topic-title">Global Analysis</summary>
+        <div class="news-grid">
+        <div class="list-agencies news-grid"></div>
+      </div>
+      </details>
+
+      
+
+  </div>
+
+</div>
+
+
+
+<!-- CHANNELS PICKER MODAL -->
+
+<div id="channelPickerModal" class="modal">
+
+  <div class="modal-content channel-picker">
+
+    <div class="feed-column-title">
+      <div class="settings-title">Select Channels</div>
+      <span class="close channel-close">&times;</span>
+    </div>
+
+    <details id="topic-arabic" class="chan">
+    <summary class="chan-title">Arabic News</summary>
+        <div class="channel-grid">
+        <div class="chan-list channel-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-lebanese" class="chan">
+      <summary class="chan-title">Lebanese Channels</summary>
+        <div class="channel-grid">
+        <div class="chan-list channel-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-gulfarabregion" class="chan">
+    <summary class="chan-title">Gulf / Arab Regional</summary>
+        <div class="channel-grid">
+        <div class="chan-list channel-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-intnews" class="chan">
+    <summary class="chan-title">International News</summary>
+        <div class="channel-grid">
+        <div class="chan-list channel-grid"></div>
+      </div>
+      </details>
+
+
+      <details id="topic-businessfinance" class="chan">
+    <summary class="chan-title">Business / Finance</summary>
+        <div class="channel-grid">
+        <div class="chan-list channel-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-doclifestyle" class="chan">
+    <summary class="chan-title">Documentery / Lifestyle</summary>
+        <div class="channel-grid">
+        <div class="chan-list channel-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-sports" class="chan">
+    <summary class="chan-title">Sports</summary>
+        <div class="channel-grid">
+        <div class="chan-list channel-grid"></div>
+      </div>
+      </details>
+
+      <details id="topic-ent" class="chan">
+    <summary class="chan-title">Entertainment</summary>
+        <div class="channel-grid">
+        <div class="chan-list channel-grid"></div>
+      </div>
+      </details>
+
+
+    
+
+  </div>
+
+</div>
+
+</body>
 </html>
